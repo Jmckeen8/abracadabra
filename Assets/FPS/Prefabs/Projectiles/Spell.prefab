@@ -80,6 +80,7 @@ MonoBehaviour:
   Root: {fileID: 87016656588205086}
   Tip: {fileID: 9072094697256973634}
   MaxLifeTime: 5
+  ParticleColor: {r: 0, g: 1, b: 0, a: 1}
   ImpactVfx: {fileID: 443653445314069269, guid: 7e3e8e2f6ecdbb04a982af0a14f2d887,
     type: 3}
   ImpactVfxLifetime: 5

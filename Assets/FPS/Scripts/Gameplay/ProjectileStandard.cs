@@ -18,6 +18,9 @@ namespace Unity.FPS.Gameplay
         [Tooltip("LifeTime of the projectile")]
         public float MaxLifeTime = 5f;
 
+        [Tooltip("Particle Colors for Projectile and ImpactVfx")]
+        public Color ParticleColor; 
+
         [Tooltip("VFX prefab to spawn upon impact")]
         public GameObject ImpactVfx;
 
@@ -73,6 +76,9 @@ namespace Unity.FPS.Gameplay
                 gameObject);
 
             m_ProjectileBase.OnShoot += OnShoot;
+
+            ColorChildParticles(transform.root.GetComponentsInChildren<Transform>());
+            ColorChildParticles(ImpactVfx.GetComponentsInChildren<Transform>());
 
             Destroy(gameObject, MaxLifeTime);
         }
@@ -264,6 +270,15 @@ namespace Unity.FPS.Gameplay
         {
             Gizmos.color = RadiusColor;
             Gizmos.DrawSphere(transform.position, Radius);
+        }
+
+        private void ColorChildParticles(Transform[] children) {
+            foreach(var child in children) {
+                if (child.GetComponent<ParticleSystem>() != null) {
+                    var main = child.GetComponent<ParticleSystem>().main;
+                    main.startColor = ParticleColor;
+                }
+            }
         }
     }
 }
