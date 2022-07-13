@@ -1,14 +1,13 @@
 import re
-
 import speech_recognition as sr
-import os
+#import UnityEngine as ue
+
 
 
 def talkToMe(audio):
     print(audio)
     for line in audio.splitlines():
-        os.system("say " + audio)
-        print()
+        print("say " + line)
 
 
 def myCommand():
@@ -18,6 +17,7 @@ def myCommand():
         print('Say something...')
         r.pause_threshold = 1
         r.adjust_for_ambient_noise(source, duration=1)
+        r.dynamic_energy_threshold = True
         audio = r.listen(source)
 
     try:
