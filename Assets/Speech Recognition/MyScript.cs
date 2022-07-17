@@ -6,7 +6,7 @@ public class MyScript : MonoBehaviour
 {
     void Start()
     {
-        PythonRunner.RunFile($"{Application.dataPath}/Speech Recognition/sr.py");
+        PythonRunner.RunFile($"{Application.dataPath}/Speech Recognition/script.py");
     }
 
     void Update()
