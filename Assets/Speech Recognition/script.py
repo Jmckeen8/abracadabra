@@ -8,7 +8,8 @@ for go in all_objects:
             UnityEngine.Debug.Log(go.name)
             #UnityEngine.Debug.Log(go.GetComponent<ProjectileColorManager>().color)
             #go.GetComponent("ProjectileColorManager").setColor("Red")
-            go.SendMessage("setColor","Red")
+            go.SendMessage("setColor","Blue")
+
     except Exception as e:
         UnityEngine.Debug.Log("Error")
         if hasattr(e, 'message'):

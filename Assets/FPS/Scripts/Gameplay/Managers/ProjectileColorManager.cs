@@ -1,4 +1,5 @@
 using UnityEngine;
+
 public class ProjectileColorManager : MonoBehaviour
 {
     public string color; 
@@ -11,6 +12,7 @@ public class ProjectileColorManager : MonoBehaviour
 
     void setColor(string newColor){
         this.color = newColor;
+        ColorSingleton.Instance.setColor(color);
         UnityEngine.Debug.Log(this.color);
     }
 }

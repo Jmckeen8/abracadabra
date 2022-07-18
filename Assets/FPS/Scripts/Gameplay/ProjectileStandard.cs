@@ -276,7 +276,7 @@ namespace Unity.FPS.Gameplay
             foreach(var child in children) {
                 if (child.GetComponent<ParticleSystem>() != null) {
                     var main = child.GetComponent<ParticleSystem>().main;
-                    main.startColor = ParticleColor;
+                    main.startColor = ColorSingleton.Instance.getColor();
                 }
             }
         }
