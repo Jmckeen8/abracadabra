@@ -47,7 +47,7 @@ if __name__ == "__main__":
     while True:
         command = myCommand()
         commands = command.split()
-        print(commands)
+        #print(commands)
         for word in commands:
             if word in validCommands:
                 print(word)
