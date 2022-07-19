@@ -6,11 +6,11 @@ public class MyScript : MonoBehaviour
 {
     void Start()
     {
-        PythonRunner.RunFile($"{Application.dataPath}/Speech Recognition/script.py");
+        srThread = new Thread(runScript);
+        srThread.Start();
     }
 
-    void Update()
-    {
-        
+    void runScript(){
+        PythonRunner.RunFile($"{Application.dataPath}/Speech Recognition/script.py");
     }
 }
