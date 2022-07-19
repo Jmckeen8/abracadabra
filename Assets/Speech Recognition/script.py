@@ -1,4 +1,7 @@
 import UnityEngine
+import sr
+
+validCommands = ["blue", "red", "green"]   # can be changed to accept more words
 
 all_objects = UnityEngine.Object.FindObjectsOfType(UnityEngine.GameObject)
 for go in all_objects:
@@ -7,8 +10,13 @@ for go in all_objects:
             UnityEngine.Debug.Log("found")
             UnityEngine.Debug.Log(go.name)
             #UnityEngine.Debug.Log(go.GetComponent<ProjectileColorManager>().color)
-            #go.GetComponent("ProjectileColorManager").setColor("Red")
-            go.SendMessage("setColor","Blue")
+            go.GetComponent("ProjectileColorManager").setColor("Red")
+            # while True:
+            #     command = sr.myCommand()
+            #     commands = command.split()
+            #     for word in commands:
+            #         if word in validCommands:
+            #             go.SendMessage("setColor", word)
 
     except Exception as e:
         UnityEngine.Debug.Log("Error")
