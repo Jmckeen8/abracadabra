@@ -1,5 +1,6 @@
 import re
 import speech_recognition as sr
+import time
 #import UnityEngine as ue
 
 
@@ -21,8 +22,11 @@ def myCommand():
         audio = r.listen(source)
 
     try:
+        start_time = time.time()
         command = r.recognize_google(audio).lower()
+        elapsed_time = time.time() - start_time
         print('You said: ' + command)
+        print("time: " + str(elapsed_time))
 
     #loop back to continue to listen for commands if unrecognizable speech is received
     except sr.UnknownValueError:
