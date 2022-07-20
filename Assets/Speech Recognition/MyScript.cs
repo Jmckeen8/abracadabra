@@ -12,6 +12,6 @@ public class MyScript : MonoBehaviour
     }
 
     void runScript(){
-        // PythonRunner.RunFile($"{Application.dataPath}/Speech Recognition/script.py");
+        PythonRunner.RunFile($"{Application.dataPath}/Speech Recognition/script.py");
     }
 }
