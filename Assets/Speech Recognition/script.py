@@ -1,7 +1,8 @@
-import UnityEngine
+#import UnityEngine
 import speech_recognition as sr
 import socket
-from threading import Thread
+import traceback
+import threading
 
 
 validCommands = ["blue", "red", "green"]   # can be changed to accept more words
@@ -60,11 +61,13 @@ def execute():
         command = myCommand()
         commands = command.split()
         for word in commands:
-            if word in validCommands:
-                sock.sendall(word.encode("UTF-8")) #Converting string to Byte, and sending it to C#
+            sock.sendall(word.encode("UTF-8")) #Converting string to Byte, and sending it to C#
 
 
 try:
-   Thread.start_new_thread(execute)
+    threading.Thread(target=execute).start()
 except:
-   UnityEngine.Debug.Log("Error: Thread not running")
+   #UnityEngine.Debug.Log("Error: Thread not running")
+   print("Error: Thread not running")
+   traceback.print_exc()
+
