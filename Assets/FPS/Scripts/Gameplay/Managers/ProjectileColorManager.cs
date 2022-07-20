@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 
 
 public class ProjectileColorManager : MonoBehaviour
@@ -12,16 +13,18 @@ public class ProjectileColorManager : MonoBehaviour
     IPAddress localAdd;
     TcpListener listener;
     TcpClient client;
+    Thread mThread;
+    bool running = false;
+
 
     void Start()
     {
         color = "Blue";
         UnityEngine.Debug.Log("Original: "+this.color);
-        GetInfo();
-    }
 
-    void Update(){
-        SendAndReceiveData();
+        ThreadStart ts = new ThreadStart(GetInfo);
+        mThread = new Thread(ts);
+        mThread.Start();
     }
 
     void setColor(){
@@ -36,6 +39,13 @@ public class ProjectileColorManager : MonoBehaviour
         listener.Start();
 
         client = listener.AcceptTcpClient();
+
+        running = true;
+        while (running)
+        {
+            SendAndReceiveData();
+        }
+        listener.Stop();
     }
 
     void SendAndReceiveData()
