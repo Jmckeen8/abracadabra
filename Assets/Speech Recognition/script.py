@@ -1,7 +1,12 @@
 import UnityEngine
 import speech_recognition as sr
+import socket
 
 validCommands = ["blue", "red", "green"]   # can be changed to accept more words
+
+host, port = "127.0.0.1", 25001
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.connect((host, port))
 
 def myCommand():
     r = sr.Recognizer()
@@ -25,24 +30,32 @@ def myCommand():
     return command
 
 
-all_objects = UnityEngine.Object.FindObjectsOfType(UnityEngine.GameObject)
-for go in all_objects:
-    try:
-        if "Player" in go.name and not "Health" in go.name:
-            UnityEngine.Debug.Log("found")
-            UnityEngine.Debug.Log(go.name)
-            #UnityEngine.Debug.Log(go.GetComponent<ProjectileColorManager>().color)
-            #go.GetComponent("ProjectileColorManager").setColor("Red")
-            while True:
-                command = myCommand()
-                commands = command.split()
-                for word in commands:
-                    if word in validCommands:
-                        go.SendMessage("setColor", word)
+# all_objects = UnityEngine.Object.FindObjectsOfType(UnityEngine.GameObject)
+# for go in all_objects:
+#     try:
+#         if "Player" in go.name and not "Health" in go.name:
+#             UnityEngine.Debug.Log("found")
+#             UnityEngine.Debug.Log(go.name)
+#             #UnityEngine.Debug.Log(go.GetComponent<ProjectileColorManager>().color)
+#             #go.GetComponent("ProjectileColorManager").setColor("Red")
+#             while True:
+#                 command = myCommand()
+#                 commands = command.split()
+#                 for word in commands:
+#                     if word in validCommands:
+#                         go.SendMessage("setColor", word)
 
-    except Exception as e:
-        UnityEngine.Debug.Log("Error")
-        if hasattr(e, 'message'):
-            UnityEngine.Debug.Log(e.message)
-        else:
-            UnityEngine.Debug.Log(e)
+#     except Exception as e:
+#         UnityEngine.Debug.Log("Error")
+#         if hasattr(e, 'message'):
+#             UnityEngine.Debug.Log(e.message)
+#         else:
+#             UnityEngine.Debug.Log(e)
+
+while True:
+    command = myCommand()
+    commands = command.split()
+    for word in commands:
+        if word in validCommands:
+            UnityEngine.Debug.Log(word)
+            sock.sendall(word.encode("UTF-8")) #Converting string to Byte, and sending it to C#
