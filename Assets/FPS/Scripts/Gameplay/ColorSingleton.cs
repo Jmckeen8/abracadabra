@@ -33,6 +33,12 @@ public sealed class ColorSingleton
             color = new Color(0.0f,0.0f,1.0f,1.0f);
         } else if(newColor.ToLower().Contains("green")){
             color = new Color(0.0f,1.0f,0.0f,1.0f);
+        } else if(newColor.ToLower().Contains("purple")){
+            color = new Color(0.6f,0.2f,1.0f,1.0f);
+        } else if(newColor.ToLower().Contains("brown")){
+            color = new Color(0.4f,0.2f,0.0f,1.0f);
+        } else if(newColor.ToLower().Contains("teal")){
+            color = new Color(0.0f,0.6f,0.6f,1.0f);
         }
     }
 
